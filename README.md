@@ -3,10 +3,10 @@ Goal:
     Build a recipe storage application. 
     It should let you 
         create new recipes, -check
-       ** get a recipe by id, 
+        get a recipe by id, -check
         get all recipes, -check
         update a recipe by id, and -check
-       ** delete a recipe by id.
+        delete a recipe by id. -check
 
 Need Routes for
     Id, 

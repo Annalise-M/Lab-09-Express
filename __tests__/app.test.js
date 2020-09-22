@@ -9,7 +9,7 @@ describe('recipe-lab routes', () => {
     return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
   });
 
-  it('creates a recipe', () => {
+  it('creates a recipe via POST', () => {
     return request(app)
       .post('/api/v1/recipes')
       .send({
@@ -35,8 +35,22 @@ describe('recipe-lab routes', () => {
       });
   });
 
-  it('gets recipe by id', async() => {
+  it('gets recipe by id via GET', async() => {
+    const recipe = await Recipe.insert({
+      id: expect.any(String),
+      name: 'cookies',
+        directions: [
+          'preheat oven to 375',
+          'mix ingredients',
+          'put dough on cookie sheet',
+          'bake for 10 minutes'
+        ]
+    });
 
+    const response = await request(app)
+      .get(`/api/v1/recipes/${recipe.id}`);
+
+    expect(response.body).toEqual(recipe);
   });
 
 

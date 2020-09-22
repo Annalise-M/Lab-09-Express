@@ -35,6 +35,11 @@ describe('recipe-lab routes', () => {
       });
   });
 
+  it('gets recipe by id', async() => {
+
+  });
+
+
   it('gets all recipes', async() => {
     const recipes = await Promise.all([
       { name: 'cookies', directions: [] },
@@ -86,4 +91,9 @@ describe('recipe-lab routes', () => {
         });
       });
   });
+
+  it('deletes a recipe by id', () => {
+
+  });
+
 });

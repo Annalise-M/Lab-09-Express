@@ -122,7 +122,7 @@ describe('log-lab routes', () => {
   //     });
   // });
 
-  it('deletes a log by id', async () => {
+  it('deletes a log by id', async() => {
     const log = await Log.insert({
       id: expect.any(String),
       recipe_id: '2',

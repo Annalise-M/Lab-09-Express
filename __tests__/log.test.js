@@ -87,5 +87,55 @@ describe('log-lab routes', () => {
       });
   });
 
+  // it('updates a log by id via PUT', async() => {
+  //   const log = await Log.insert([
+  //     {
+  //       id: expect.any(String),
+  //       recipe_id: '2',
+  //       date_of_event: '2020-09-22',
+  //       notes: 'here are some notey note notes notesssssss',
+  //       rating: 4
+  //     }
+  //   ]);
+
+  //   return request(app)
+  //     .put(`/api/v1/logs/${log.id}`)
+  //     .send([
+  //       {
+  //         id: expect.any(String),
+  //         recipe_id: '2',
+  //         date_of_event: '2020-09-22',
+  //         notes: 'change of notes herrreee',
+  //         rating: 4
+  //       }
+  //     ])
+  //     .then(res => {
+  //       expect(res.body).toEqual([
+  //         {
+  //           id: expect.any(String),
+  //           recipe_id: '2',
+  //           date_of_event: '2020-09-22',
+  //           notes: 'here are some notey note notes notesssssss',
+  //           rating: 4
+  //         }
+  //       ]);
+  //     });
+  // });
+
+  it('deletes a log by id', async () => {
+    const log = await Log.insert({
+      id: expect.any(String),
+      recipe_id: '2',
+      date_of_event: '2020-09-22',
+      notes: 'here are some notey note notes notesssssss',
+      rating: 4
+    });
+
+    return request(app)
+      .delete(`/api/v1/logs/${log.id}`)
+      .then(res => {
+        expect(res.body).toEqual(log);
+      });
+  });
 
 });

@@ -3,14 +3,14 @@ DROP TABLE IF EXISTS logs;
 
 CREATE TABLE recipes (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT,
   directions TEXT[]
 );
 
 CREATE TABLE logs (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   recipe_id BIGINT NOT NULL REFERENCES recipes(id),
-  date_of_event DATE NOT NULL,
+  date_of_event TEXT,
   notes TEXT,
   rating INT
 );

@@ -39,12 +39,12 @@ describe('recipe-lab routes', () => {
     const recipe = await Recipe.insert({
       id: expect.any(String),
       name: 'cookies',
-        directions: [
-          'preheat oven to 375',
-          'mix ingredients',
-          'put dough on cookie sheet',
-          'bake for 10 minutes'
-        ]
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ]
     });
 
     const response = await request(app)
@@ -103,7 +103,7 @@ describe('recipe-lab routes', () => {
             'bake for 10 minutes'
           ]
         });
-      })
+      });
   });
 
   it('deletes a recipe by id via DELETE', async() => {

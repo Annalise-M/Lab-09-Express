@@ -9,7 +9,7 @@ describe('recipe-lab routes', () => {
     return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
   });
 
-  it('creates a recipe', () => {
+  it('creates a recipe via POST', () => {
     return request(app)
       .post('/api/v1/recipes')
       .send({
@@ -35,7 +35,26 @@ describe('recipe-lab routes', () => {
       });
   });
 
-  it('gets all recipes', async() => {
+  it('gets recipe by id via GET', async() => {
+    const recipe = await Recipe.insert({
+      id: expect.any(String),
+      name: 'cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ]
+    });
+
+    const response = await request(app)
+      .get(`/api/v1/recipes/${recipe.id}`);
+
+    expect(response.body).toEqual(recipe);
+  });
+
+
+  it('gets all recipes via GET', async() => {
     const recipes = await Promise.all([
       { name: 'cookies', directions: [] },
       { name: 'cake', directions: [] },
@@ -51,7 +70,7 @@ describe('recipe-lab routes', () => {
       });
   });
 
-  it('updates a recipe by id', async() => {
+  it('updates a recipe by id via PUT', async() => {
     const recipe = await Recipe.insert({
       name: 'cookies',
       directions: [
@@ -85,5 +104,22 @@ describe('recipe-lab routes', () => {
           ]
         });
       });
+  });
+
+  it('deletes a recipe by id via DELETE', async() => {
+    const recipe = await Recipe.insert({
+      name: 'cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ],
+    });
+
+    const response = await request(app)
+      .delete(`/api/v1/recipes/${recipe.id}`);
+
+    expect(response.body).toEqual(recipe);
   });
 });
